@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>2-v-on和v-bind指令</title>
+</head>
+<body>
+  <div id="app">
+    <h1>1.双大括号表达式</h1>
+    <p>{{ content }}</p>
+    <p>{{ content.toUpperCase() }}</p>
+    <p v-text="url"></p> <!--textContext-->
+    <p v-html="url"></p> <!--innerHtml-->
+    <hr>
+    <h1>2.指令一：数据绑定v-bind</h1>
+    <img src="imgUrl"> <!--不能加载图片-->
+    <img v-bind:src="imgUrl"> <!--可以加载图片-->
+    <!-- v-bind可以简写成: -->
+    <img :src="imgUrl">
+    <hr>
+    <h1>3.指令二：事件绑定v-on</h1>
+    <button v-on:click="test">点击一下</button>
+    <button @click='test2(content)'>点击一下</button>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          content: 'stephen curry',
+          url: '<a href="http://www.baidu.com">百度一下</a>',
+          imgUrl: 'https://cn.vuejs.org/images/logo.png'
+        }
+      },
+      methods: {
+        test() {
+          alert('hello jack')
+        },
+        test2(content) {
+          alert(content)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

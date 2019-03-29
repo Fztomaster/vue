@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>3-computed和watch</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" placeholder="请输入你的姓" v-model="firstName"><br>
+    <input type="text" placeholder="请输入你的名" v-model="lastName"><br>
+    姓名: <input type="text" v-model="name"><br>
+    英文名字: <input type="text" v-model="englishName">
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          firstName: '',
+          lastName: ''
+        }
+      },
+      computed: {
+        // 初始化显示/firstName或lastName发现变化时触发该函数
+        name() {
+          // 方法返回值作为属性值
+          return this.firstName + '-' +this.lastName
+        },
+        englishName: {
+          // 当需要读取当前属性值时，回调get()，用于取值
+          get() {
+            return this.firstName + '-' + this.lastName
+          },
+          // 当前属性值变化，回调set()，用于设置值
+          set(value) {            
+            const names = value.split('-')
+            this.firstName = names[0]
+            this.lastName = names[1]
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
